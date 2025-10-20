@@ -7,6 +7,11 @@ export default function App() {
       <View style={styles.header}>
         <Text style={{ fontSize: 24, fontWeight: 'bold' }}>My App Header</Text>
       </View>
+      <View style={styles.body}>
+        <Text>Welcome to my app!</Text>
+        <Text>This is the body content.</Text>
+        <Text>Enjoy exploring the features.</Text>
+      </View>
       <StatusBar style="auto" />
     </View>
   );
@@ -30,5 +35,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 2,
     elevation: 3,
+  },
+  body: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

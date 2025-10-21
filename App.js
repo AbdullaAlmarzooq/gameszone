@@ -1,17 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { useState } from 'react';
 
 export default function App() {
+
+  const [name, setName] = useState('Abdulla Almarzooq');
+  const [age, setAge] = useState('32');
+
+
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={{ fontSize: 24, fontWeight: 'bold' }}>My App Header</Text>
-      </View>
-      <View style={styles.body}>
-        <Text>Welcome to my app!</Text>
-        <Text>This is the body content.</Text>
-        <Text>Enjoy exploring the features.</Text>
-      </View>
+      <Text>Enter your name:</Text>
+      <TextInput style={{ width: 200, height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingLeft: 5 }}
+       placeholder='Ahmed'
+       onChangeText={text => setName(text)} />
+      <Text>Enter your age:</Text>
+      <TextInput style={{ width: 200, height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingLeft: 5 }}
+       placeholder='35'
+       onChangeText={text => setAge(text)} 
+       keyboardType='numeric'/>
+      <Text>Your name is: {name}</Text>
+      <Text>Your age is: {age}</Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -21,23 +30,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  header: {
-    width: '100%',
-    height: 80,
-    backgroundColor: '#f8f8f8',
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    elevation: 3,
-  },
-  body: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },

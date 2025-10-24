@@ -1,27 +1,44 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { useState } from 'react';
+import Header from './components/header';
+import TodoItem from './components/todoItem';
+import AddTodo from './components/addTodo';
 
 export default function App() {
 
-  const [name, setName] = useState('Abdulla Almarzooq');
-  const [age, setAge] = useState('32');
+  const [todos, setTodos] = useState([
+    { text: 'buy coffee', key: '1' },
+    { text: 'create an app', key: '2' },
+    { text: 'play on the switch', key: '3' },
+  ]);
 
+  const pressHandler = (key) => {
+    setTodos(prevTodos => {
+      return prevTodos.filter(todo => todo.key != key);
+    });
+  };
+
+  const submitHandler = (text) => {
+    setTodos(prevTodos => {
+      return [{ text: text, key: Math.random().toString() }, ...prevTodos];
+    });
+  };
 
   return (
     <View style={styles.container}>
-      <Text>Enter your name:</Text>
-      <TextInput style={{ width: 200, height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingLeft: 5 }}
-       placeholder='Ahmed'
-       onChangeText={text => setName(text)} />
-      <Text>Enter your age:</Text>
-      <TextInput style={{ width: 200, height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingLeft: 5 }}
-       placeholder='35'
-       onChangeText={text => setAge(text)} 
-       keyboardType='numeric'/>
-      <Text>Your name is: {name}</Text>
-      <Text>Your age is: {age}</Text>
-      <StatusBar style="auto" />
+      <Header />
+      <View style={styles.content}>
+      </View>
+      <AddTodo submitHandler={submitHandler}/>
+      <View style={styles.list}>
+        <FlatList
+          data={todos}
+          renderItem={({ item }) => (
+              <TodoItem item={item} pressHandler={pressHandler} />
+          )}
+        />
+      </View>
     </View>
   );
 }
@@ -29,8 +46,14 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#eeeeeeff',
+  },
+  content: {
+    padding: 10,
+  },
+  list: {
+    width: '75%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
 });

@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useState } from 'react';
 import Header from './components/header';
 import TodoItem from './components/todoItem';
@@ -20,12 +20,19 @@ export default function App() {
   };
 
   const submitHandler = (text) => {
-    setTodos(prevTodos => {
-      return [{ text: text, key: Math.random().toString() }, ...prevTodos];
-    });
+    if (text.length > 3) {
+      setTodos(prevTodos => {
+        return [{ text: text, key: Math.random().toString() }, ...prevTodos];
+      });
+    } else {
+      Alert.alert('OOPS!', 'Todos must be over 3 characters long', [
+        { text: 'Understood', onPress: () => console.log('alert closed') }
+      ]);
+    }
   };
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
       <Header />
       <View style={styles.content}>
@@ -40,6 +47,7 @@ export default function App() {
         />
       </View>
     </View>
+    </TouchableWithoutFeedback>
   );
 }
 

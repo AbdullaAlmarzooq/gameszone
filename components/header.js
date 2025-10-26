@@ -14,10 +14,12 @@ export default function Header() {
     header: {
       backgroundColor: '#008cffff',
       width: '100%',
-      padding: 20,
       alignItems: 'center',
       borderBottomWidth: 1,
       borderBottomColor: '#eee',
+      justifyContent: 'flex-end',
+      height: 100,
+      paddingVertical: 20,
     },
     title: {
       fontSize: 24,

@@ -32,11 +32,13 @@ export default function App() {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback onPress={() => {
+        Keyboard.dismiss();
+        console.log('dismissed keyboard');
+      }}>
     <View style={styles.container}>
       <Header />
       <View style={styles.content}>
-      </View>
       <AddTodo submitHandler={submitHandler}/>
       <View style={styles.list}>
         <FlatList
@@ -45,6 +47,7 @@ export default function App() {
               <TodoItem item={item} pressHandler={pressHandler} />
           )}
         />
+      </View>
       </View>
     </View>
     </TouchableWithoutFeedback>
@@ -58,8 +61,10 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 10,
+    flex: 1,
   },
   list: {
+    flex: 1,
     width: '75%',
     marginLeft: 'auto',
     marginRight: 'auto',
